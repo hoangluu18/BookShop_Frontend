@@ -1,5 +1,5 @@
 import React from "react";
-import '@fortawesome/fontawesome-free/css/all.min.css';import '@fortawesome/fontawesome-free/css/all.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css'; import '@fortawesome/fontawesome-free/css/all.min.css';
 function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -13,7 +13,7 @@ function Navbar() {
                         <li className="nav-item">
                             <a className="nav-link active" aria-current="page" href="#">Trang chủ</a>
                         </li>
-                        
+
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Thể loại sách
@@ -43,7 +43,7 @@ function Navbar() {
                     </ul>
                     <form className="d-flex" role="search">
                         <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
+                        <button className="btn btn-outline-success" type="submit">Search</button>
                     </form>
 
                     <ul className="navbar-nav me-1">
