@@ -1,12 +1,12 @@
 import React from "react";
-import bookstoreLogo from '../../images/bookstore.png';
+
 import '@fortawesome/fontawesome-free/css/all.min.css'; import '@fortawesome/fontawesome-free/css/all.min.css';
 function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <a className="main-navbar__logo d-block mr-lg-5" href="#">
-                    <img src={bookstoreLogo} alt="Bookstore" height="50" width="50" />
+                    <img src="/images/logo/bookstore.png" alt="Bookstore" height="50" width="50" />
                 </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

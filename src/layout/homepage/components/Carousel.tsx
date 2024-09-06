@@ -13,7 +13,7 @@ function Carousel() {
                     <div className="carousel-item active">
                         <div className="row align-items-center">
                             <div className="col-5 text-center">
-                                <img src={require('./../../../images/books/1.jpg')} className="float-end" style={{ width: '150px' }} />
+                                <img src='/images/books/1.jpg' className="float-end" style={{ width: '150px' }} />
                             </div>
                             <div className="col-7" style={{ maxWidth: '500px', wordWrap: 'break-word' }}>
                                 <h5>The Mechanics of Miracles</h5>
@@ -26,7 +26,7 @@ function Carousel() {
                     <div className="carousel-item">
                         <div className="row align-items-center">
                             <div className="col-5 text-center">
-                                <img src={require('./../../../images/books/2.jpg')} className="float-end" style={{ width: '150px' }} />
+                                <img src='/images/books/2.jpg' className="float-end" style={{ width: '150px' }} />
                             </div>
                             <div className="col-7" style={{ maxWidth: '500px', wordWrap: 'break-word' }}>
                                 <h5>From Budapest to Hollywood</h5>
@@ -37,7 +37,7 @@ function Carousel() {
                     <div className="carousel-item">
                         <div className="row align-items-center">
                             <div className="col-5 text-center">
-                                <img src={require('./../../../images/books/3.webp')} className="float-end" style={{ width: '150px' }} />
+                                <img src='/images/books/3.webp' className="float-end" style={{ width: '150px' }} />
                             </div>
                             <div className="col-7" style={{ maxWidth: '500px', wordWrap: 'break-word' }}>
                                 <h5>How to Talk to Anyone</h5>
@@ -49,7 +49,7 @@ function Carousel() {
                     <div className="carousel-item">
                         <div className="row align-items-center">
                             <div className="col-5 text-center">
-                                <img src={require('./../../../images/books/4.jpg')} className="float-end" style={{ width: '150px' }} />
+                                <img src='/images/books/4.jpg' className="float-end" style={{ width: '150px' }} />
                             </div>
                             <div className="col-7" style={{ maxWidth: '500px', textAlign: 'justify' }}>
                                 <h5>Payback</h5>
