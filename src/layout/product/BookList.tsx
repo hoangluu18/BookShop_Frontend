@@ -1,33 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BookProps from "./components/BookProps";
-import Book from "../../models/Book";
-const List: React.FC = () => {
-    const books: Book[] = [
-        {
-            id: 1,
-            title: 'Book 1',
-            description: 'Description for Book 1',
-            originalPrice: 50000,
-            price: 45000,
-            imageUrl: './../../images/books/1.jpg'
-        },
+import BookModel from "../../models/BookModel";
+import { fetchBooks } from "../../api/BookApi";
+const BookList:React.FC = () => {
+    const [bookList, setBookList] = React.useState<BookModel[]>([]);
+    const [loading, setLoading] = React.useState<boolean>(true);
+    const [error, setError] = React.useState(null);
 
-        {
-            id: 2,
-            title: 'Book 2',
-            description: 'Description for Book 2',
-            originalPrice: 50000,
-            price: 45000,
-            imageUrl: './../../images/books/2.jpg'
-        },
+    useEffect(() => {
+        fetchBooks().then(
+            data => {
+                setBookList(data);
+                setLoading(false);
+            }
+        ).catch(
+            error => {
+                setError(error.message);
+                setLoading(false);
+            }
+        )
+    },[]) //chi goi 1 lan
+    if(loading){
+        return (
+            <div>
+                <h2>Loading...</h2>
+            </div>
+        )
+    }
 
-    ]
+    if(error){
+        return (
+            <div>
+                <h2>Error: {error}</h2>
+            </div>
+        )
+    }
     return (
         <div className="container">
             <div className="row mt-4">
                 {
-                    books.map(book => (
-                            <BookProps key={book.id} book={book} />
+                    bookList.map(book => (
+                            <BookProps key={book.bookId} book={book} />
                         )
                     )
                 }
@@ -36,4 +49,4 @@ const List: React.FC = () => {
     )
 }
 
-export default List;
+export default BookList;

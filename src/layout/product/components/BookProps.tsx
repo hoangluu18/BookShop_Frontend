@@ -1,37 +1,60 @@
-import React from "react";
-import Book from "../../../models/Book";
-
-interface BookProps {
-    book: Book;
+import React, { useEffect } from "react";
+import BookModel from "../../../models/BookModel";
+import ImageModel from "../../../models/ImageModel";
+import { fetchImages } from "../../../api/ImageApi";
+interface BookPropsInterface {
+    book : BookModel
 }
 
-const BookComponent: React.FC<BookProps> = ({ book }) => {
+
+const BookProps: React.FC<BookPropsInterface> = (props ) => {
+    const bookId: number = props.book.bookId;
+    const [imageList, setImageList] = React.useState<ImageModel[]>([]);
+    const [loading, setLoading] = React.useState<boolean>(true);
+    const [error, setError] = React.useState(null);
+
+    useEffect(() => {
+        fetchImages(bookId).then(
+            data => {
+                setImageList(data);
+                setLoading(false);
+            }
+        ).catch(
+            error => {
+                setError(error.message);
+                setLoading(false);
+            }
+        )
+    },[]) //chi goi 1 lan
     return (
         <div className="col-md-3 mt-2">
             <div className="card">
                 {/* Hình ảnh sách */}
-                <img
-                    src={book.imageUrl}
+                { imageList.length > 0 &&
+                    <img
+                    src={imageList[0].data}
                     className="card-img-top"
-                    alt={book.title}
+                    alt={props.book.bookTitle}
                     style={{ height: '350px' }}
-                />
+                    />                  
+                }
+
                 <div className="card-body">
                     {/* Tiêu đề sách */}
-                    <h5 className="card-title">{book.title}</h5>
+                    <h5 className="card-title">{props.book.bookTitle}</h5>
 
                     {/* Mô tả sách */}
-                    <p className="card-text">{book.description}</p>
+                    <p className="card-text">{props.book.description}</p>
 
                     {/* Phần hiển thị giá */}
                     <div className="price">
                         {/* Giá gốc */}
                         <span className="original-price" style={{ marginRight: '8px' }}>
-                            <del>{book.originalPrice}</del>
+                            <del>{props.book.coverPrice}</del>
                         </span>
                         {/* Giá giảm */}
                         <span className="discounted-price">
-                            <strong>{book.price}</strong>
+                            <strong>{props.book.sellingPrice}</strong>
                         </span>
                     </div>
 
@@ -54,4 +77,4 @@ const BookComponent: React.FC<BookProps> = ({ book }) => {
     );
 };
 
-export default BookComponent;
+export default BookProps;
