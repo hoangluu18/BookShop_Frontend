@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import BookModel from "../../../models/BookModel";
 import ImageModel from "../../../models/ImageModel";
-import { fetchImages } from "../../../api/ImageApi";
+import { fetchImages, fetchMainImage } from "../../../api/ImageApi";
 interface BookPropsInterface {
     book : BookModel
 }
@@ -14,9 +14,9 @@ const BookProps: React.FC<BookPropsInterface> = (props ) => {
     const [error, setError] = React.useState(null);
 
     useEffect(() => {
-        fetchImages(bookId).then(
+        fetchMainImage(bookId).then(
             data => {
-                setImageList(data);
+                setImageList([data]);
                 setLoading(false);
             }
         ).catch(

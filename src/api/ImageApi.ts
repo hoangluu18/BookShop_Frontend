@@ -17,5 +17,12 @@ export async function fetchImages(bookId: Number): Promise<ImageModel[]> {
     return data;
 }
 
+export async function fetchMainImage(bookId: Number): Promise<ImageModel> {
+    const data: ImageModel[]= await fetchImages(bookId);
+    return data[0] as ImageModel;
+}
+
+
+
 
 

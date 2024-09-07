@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import BookProps from "./components/BookProps";
 import BookModel from "../../models/BookModel";
-import { fetchBooks } from "../../api/BookApi";
+import { fetchAllBooks, fetchBooks } from "../../api/BookApi";
 const BookList:React.FC = () => {
     const [bookList, setBookList] = React.useState<BookModel[]>([]);
     const [loading, setLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState(null);
 
     useEffect(() => {
-        fetchBooks().then(
+        fetchAllBooks().then(
             data => {
                 setBookList(data);
                 setLoading(false);
