@@ -1,7 +1,20 @@
 import React from "react";
 
 import '@fortawesome/fontawesome-free/css/all.min.css'; import '@fortawesome/fontawesome-free/css/all.min.css';
-function Navbar() {
+
+interface NavbarProps {
+    keyWord: string;
+    setKeyword: (keyword: string) => void;
+}
+
+function Navbar({ keyWord, setKeyword }: NavbarProps) {
+    let key : string = '';
+    const onSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        key = e.target.value;
+    }
+    const handleSearch = () => {
+        setKeyword(key);
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -44,10 +57,10 @@ function Navbar() {
                             <a className="nav-link" href="#" >Liên hệ</a>
                         </li>
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" />
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <div className="d-flex" role="search">
+                        <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" onChange={onSearchInputChange}  />
+                        <button className="btn btn-outline-success" type="submit" onClick={handleSearch}>Search</button>
+                    </div>
 
                     <ul className="navbar-nav me-1">
                         <li className="nav-item">

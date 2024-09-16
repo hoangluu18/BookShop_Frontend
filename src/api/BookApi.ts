@@ -34,3 +34,12 @@ export async function fetch3Books(): Promise<BookApiInterface> {
     
 }
 
+export async function fetchSearchBooks(search : string): Promise<BookApiInterface> {
+    const encode = encodeURIComponent(search);
+    const endpoint = `http://localhost:8080/book/search/findBookByBookTitleContaining?bookTitle=${encode}&sort=bookId,desc&size=5`;
+    if(search === ""){
+        return fetchAllBooks(0);
+    }
+    return fetchBooks(endpoint);
+    //return fetchAllBooks(0);
+}
