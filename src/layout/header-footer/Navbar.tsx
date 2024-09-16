@@ -1,6 +1,7 @@
 import React from "react";
 
 import '@fortawesome/fontawesome-free/css/all.min.css'; import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Link } from "react-router-dom";
 
 interface NavbarProps {
     keyWord: string;
@@ -31,13 +32,13 @@ function Navbar({ keyWord, setKeyword }: NavbarProps) {
                         </li>
 
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Thể loại sách
-                            </a>
+                            </Link>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Thể loại 1</a></li>
-                                <li><a className="dropdown-item" href="#">Thể loại 2</a></li>
-                                <li><a className="dropdown-item" href="#">Thể loại 3</a></li>
+                                <li><Link className="dropdown-item" to="/1">Thể loại 1</Link></li>
+                                <li><Link className="dropdown-item" to="/2">Thể loại 2</Link></li>
+                                <li><Link className="dropdown-item" to="/3">Thể loại 3</Link></li>
                             </ul>
                         </li>
 

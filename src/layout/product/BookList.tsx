@@ -6,9 +6,10 @@ import Pagination from "../utils/Pagination";
 
 interface BookListProps {
     keyWord: string;
+    categoryId: number;
 }
 
-function BookList({keyWord}: BookListProps) {
+function BookList({keyWord, categoryId}: BookListProps) {
     const [bookList, setBookList] = React.useState<BookModel[]>([]);
     const [loading, setLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState(null);
@@ -17,7 +18,7 @@ function BookList({keyWord}: BookListProps) {
     const [totalBooks, setTotalBooks] = React.useState<number>(0);
 
     useEffect(() => {
-        if(keyWord === ""){
+        if(keyWord === "" && categoryId === 0){
         fetchAllBooks(pageCurrent - 1).then(
             data => {
                 setBookList(data.data);
@@ -32,7 +33,7 @@ function BookList({keyWord}: BookListProps) {
             }
         )
     }else{
-        fetchSearchBooks(keyWord).then(
+        fetchSearchBooks(keyWord, categoryId).then(
             data => {
                 setBookList(data.data);
                 setLoading(false);
@@ -46,7 +47,7 @@ function BookList({keyWord}: BookListProps) {
             }
         )
     }
-    },[pageCurrent,keyWord]) //chi goi 1 lan
+    },[pageCurrent,keyWord, categoryId]) //load lai khi thay doi 
     if(loading){
         return (
             <div>

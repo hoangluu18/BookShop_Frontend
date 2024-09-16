@@ -34,11 +34,18 @@ export async function fetch3Books(): Promise<BookApiInterface> {
     
 }
 
-export async function fetchSearchBooks(search : string): Promise<BookApiInterface> {
+export async function fetchSearchBooks(search : string, categoryId: number): Promise<BookApiInterface> {
     const encode = encodeURIComponent(search);
-    const endpoint = `http://localhost:8080/book/search/findBookByBookTitleContaining?bookTitle=${encode}&sort=bookId,desc&size=5`;
-    if(search === ""){
+    const encode2 = encodeURIComponent(categoryId);
+    let endpoint = `http://localhost:8080/book/search/findBookByBookTitleContaining?bookTitle=${encode}&sort=bookId,desc&size=5`;
+    if(search === "" && categoryId === 0){
         return fetchAllBooks(0);
+    }
+    else if(search === "" && categoryId > 0){
+        endpoint = `http://localhost:8080/book/search/findBookByCategoryList_categoryId?categoryId=${encode2}&sort=bookId,desc&size=5`;
+    }
+    else if(search !== "" && categoryId > 0){
+        endpoint = `http://localhost:8080/book/search/findBookByBookTitleContainingAndCategoryList_categoryId?bookTitle=${encode}&categoryId=${encode2}&sort=bookId,desc&size=5`;
     }
     return fetchBooks(endpoint);
     //return fetchAllBooks(0);
