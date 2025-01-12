@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import BookModel from "../../../models/BookModel";
 import ImageModel from "../../../models/ImageModel";
 import { fetchImages, fetchMainImage } from "../../../api/ImageApi";
+import { Link } from "react-router-dom";
 interface BookPropsInterface {
-    book : BookModel
+    book: BookModel
 }
 
 
-const BookProps: React.FC<BookPropsInterface> = (props ) => {
+const BookProps: React.FC<BookPropsInterface> = (props) => {
     const bookId: number = props.book.bookId;
     const [imageList, setImageList] = React.useState<ImageModel[]>([]);
     const [loading, setLoading] = React.useState<boolean>(true);
@@ -25,26 +26,29 @@ const BookProps: React.FC<BookPropsInterface> = (props ) => {
                 setLoading(false);
             }
         )
-    },[]) //chi goi 1 lan
+    }, []) //chi goi 1 lan
     return (
         <div className="col-md-3 mt-2">
             <div className="card">
-                {/* Hình ảnh sách */}
-                { imageList.length > 0 &&
-                    <img
-                    src={imageList[0].data}
-                    className="card-img-top"
-                    alt={props.book.bookTitle}
-                    style={{ height: '350px' }}
-                    />                  
-                }
+                <Link to={`/book/${props.book.bookId}`}>
+                    {imageList.length > 0 &&
+                        <img
+                            src={imageList[0].data}
+                            className="card-img-top"
+                            alt={props.book.bookTitle}
+                            style={{ height: '350px' }}
+                        />
+                    }
+                </Link>
+
 
                 <div className="card-body">
                     {/* Tiêu đề sách */}
-                    <h5 className="card-title">{props.book.bookTitle}</h5>
-
+                    <Link to={`/book/${props.book.bookId}`} style={{ textDecoration: 'none', color:'#003366'}}>
+                        <h5 className="card-title">{props.book.bookTitle}</h5>
+                    </Link>
                     {/* Mô tả sách */}
-                    <p className="card-text">{props.book.description}</p>
+                    {/* <p className="card-text">{props.book.description}</p> */}
 
                     {/* Phần hiển thị giá */}
                     <div className="price">
@@ -65,7 +69,7 @@ const BookProps: React.FC<BookPropsInterface> = (props ) => {
                                 <i className="fas fa-heart"></i>
                             </a>
                         </div>
-                        <div className="col-6" style={{textAlign:"right"}}>
+                        <div className="col-6" style={{ textAlign: "right" }}>
                             <button className="btn btn-danger btn-block">
                                 <i className="fas fa-shopping-cart"></i>
                             </button>

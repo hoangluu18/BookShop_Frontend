@@ -1,7 +1,8 @@
 import React from "react";
 
 import '@fortawesome/fontawesome-free/css/all.min.css'; import '@fortawesome/fontawesome-free/css/all.min.css';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { Search } from "react-bootstrap-icons";
 
 interface NavbarProps {
     keyWord: string;
@@ -19,7 +20,7 @@ function Navbar({ keyWord, setKeyword }: NavbarProps) {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-                <a className="main-navbar__logo d-block mr-lg-5" href="#">
+                <a className="main-navbar__logo d-block mr-lg-5" href="/">
                     <img src="/images/logo/bookstore.png" alt="Bookstore" height="50" width="50" />
                 </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,17 +29,17 @@ function Navbar({ keyWord, setKeyword }: NavbarProps) {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Trang chủ</a>
+                            <NavLink className="nav-link active" aria-current="page" to="/">Trang chủ</NavLink>
                         </li>
 
                         <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <NavLink className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Thể loại sách
-                            </Link>
+                            </NavLink>
                             <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" to="/1">Thể loại 1</Link></li>
-                                <li><Link className="dropdown-item" to="/2">Thể loại 2</Link></li>
-                                <li><Link className="dropdown-item" to="/3">Thể loại 3</Link></li>
+                                <li><NavLink className="dropdown-item" to="/category/1">Thể loại 1</NavLink></li>
+                                <li><NavLink className="dropdown-item" to="/category/2">Thể loại 2</NavLink></li>
+                                <li><NavLink className="dropdown-item" to="/category/3">Thể loại 3</NavLink></li>
                             </ul>
                         </li>
 
@@ -60,7 +61,7 @@ function Navbar({ keyWord, setKeyword }: NavbarProps) {
                     </ul>
                     <div className="d-flex" role="search">
                         <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" onChange={onSearchInputChange}  />
-                        <button className="btn btn-outline-success" type="submit" onClick={handleSearch}>Search</button>
+                        <button className="btn btn-outline-success" type="submit" onClick={handleSearch} ><Search/></button>
                     </div>
 
                     <ul className="navbar-nav me-1">

@@ -1,6 +1,7 @@
 import React from "react";
 import BookModel from "../models/BookModel";
 import request from "./Request";
+import { promises } from "dns";
 
 interface BookApiInterface {
     data: BookModel[];
@@ -50,3 +51,28 @@ export async function fetchSearchBooks(search : string, categoryId: number): Pro
     return fetchBooks(endpoint);
     //return fetchAllBooks(0);
 }
+
+export async function fetchBooksById(bookId: number) : Promise<BookModel | null > {
+    const endpoint = `http://localhost:8080/book/${bookId}`;
+    let result : BookModel | null = null;
+    try {
+        const respond = await fetch(endpoint);
+
+        if(!respond.ok){
+            throw new Error('Gap loi khi goi API');
+        }
+
+        const data = await respond.json();
+        if(data) {
+            result = new BookModel(data.bookId, data.bookTitle, data.authorName, data.ISBN, data.description, data.coverPrice, data.sellingPrice, data.quantity, data.averageRating);
+        }
+        else {
+            throw new Error('Khong co du lieu');
+        }
+    } catch (error) {
+        console.log('error: ', error);
+    }
+    return result;
+}
+
+

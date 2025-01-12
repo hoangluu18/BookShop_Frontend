@@ -24,8 +24,8 @@ function Banner() {
                             Đọc sách mở lối tri thức
                         </h3>
                         <p className="">Pmshoanghot</p>
-                        <button className="btn btn-primary btn-lg text-white">
-                            Khám phá sách tại đây
+                        <button className="btn btn-lg text-white border">
+                            <a href="#BookList" style={{ color: 'white', textDecoration: 'none' }}>Khám phá sách tại đây</a>
                         </button>
                     </div>
                 </div>

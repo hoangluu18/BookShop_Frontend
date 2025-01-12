@@ -22,6 +22,10 @@ export async function fetchMainImage(bookId: Number): Promise<ImageModel> {
     return data[0] as ImageModel;
 }
 
+export async function fetchAllImagesById(bookId: Number): Promise<ImageModel[]> {
+    return fetchImages(bookId);
+}
+
 
 
 

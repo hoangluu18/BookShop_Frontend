@@ -7,6 +7,7 @@ import Footer from './layout/header-footer/Footer';
 import HomePage from './layout/homepage/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import About from './layout/about/About';
+import BookDetail from './layout/product/BookDetail';
 function App() {
   const [keyword, setKeyword] = useState('');
 
@@ -16,8 +17,9 @@ function App() {
         <Navbar keyWord={keyword} setKeyword={setKeyword} />
         <Routes>
           <Route path='/' element={<HomePage keyWord={keyword} />} />
-          <Route path='/:categoryId'  element={<HomePage keyWord={keyword} />}  />
+          <Route path='category/:categoryId'  element={<HomePage keyWord={keyword} />}  />
           <Route path='/about' element={<About />} /> 
+          <Route path='book/:bookId' element= {<BookDetail />} />
         </Routes>
 
         <Footer />

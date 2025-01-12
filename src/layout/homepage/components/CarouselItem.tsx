@@ -32,9 +32,9 @@ const CarouselItem: React.FC<CarouselItemProps> = (props) => {
             </div>
             <div className="col-7" style={{ maxWidth: '500px', wordWrap: 'break-word' }}>
                 <h5>{props.book.bookTitle}</h5>
-                <p>
+                {/* <p>
                     {props.book.description}
-                </p>
+                </p> */}
             </div>
         </div>
     )
