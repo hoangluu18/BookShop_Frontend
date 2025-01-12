@@ -3,6 +3,8 @@ import BookModel from "../../../models/BookModel";
 import ImageModel from "../../../models/ImageModel";
 import { fetchImages, fetchMainImage } from "../../../api/ImageApi";
 import { Link } from "react-router-dom";
+import RatingStar from "../../utils/RatingStar";
+import NumberFormat from "../../utils/NumberFormat";
 interface BookPropsInterface {
     book: BookModel
 }
@@ -54,25 +56,28 @@ const BookProps: React.FC<BookPropsInterface> = (props) => {
                     <div className="price">
                         {/* Giá gốc */}
                         <span className="original-price" style={{ marginRight: '8px' }}>
-                            <del>{props.book.coverPrice}</del>
+                            <del>{NumberFormat(props.book.coverPrice ?? 0)} đ</del>
                         </span>
                         {/* Giá giảm */}
                         <span className="discounted-price">
-                            <strong>{props.book.sellingPrice}</strong>
+                            <strong>{NumberFormat(props.book.sellingPrice ?? 0)} đ</strong>
                         </span>
                     </div>
 
                     {/* Các nút hành động */}
                     <div className="row mt-2" role="group">
-                        <div className="col-6">
-                            <a href="#" className="btn btn-secondary btn-block">
-                                <i className="fas fa-heart"></i>
-                            </a>
-                        </div>
-                        <div className="col-6" style={{ textAlign: "right" }}>
-                            <button className="btn btn-danger btn-block">
-                                <i className="fas fa-shopping-cart"></i>
-                            </button>
+                        <div className="col-12 d-flex justify-content-between align-items-center">
+                            <div>
+                                {RatingStar(props.book.averageRating ?? 0)}
+                            </div>
+                            <div>
+                                <a href="#" className="btn btn-secondary me-2">
+                                    <i className="fas fa-heart"></i>
+                                </a>
+                                <button className="btn btn-danger">
+                                    <i className="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

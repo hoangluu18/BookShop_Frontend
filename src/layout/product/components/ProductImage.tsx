@@ -20,8 +20,6 @@ const ProductImage: React.FC<ProductImageInterface> = (props) => {
         fetchAllImagesById(bookId).then(
             data => {
                 setImageList(data);
-                if(data.length > 0){
-                }
                 setLoading(false);
             }
         ).catch(

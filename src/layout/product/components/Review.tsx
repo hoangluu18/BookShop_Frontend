@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel"
 import { fetchAllReviews } from "../../../api/ReviewApi";
 import ReviewModel from "../../../models/ReviewModel";
+import { Star, StarFill, StarHalf } from "react-bootstrap-icons";
+import renderStars from "../../utils/RatingStar";
 interface ReviewInterface {
     bookId: number
 }
@@ -47,13 +49,15 @@ const Review: React.FC<ReviewInterface> = (props) => {
             </div>
         )
     }
+
+
     return (
         <div className="container mt-2 mb-2 text-center">
             <h4>Đánh giá sản phẩm:</h4>
             {reviewList.map((review, index) => (
                 <div className="row" key={index}>
                     <div className="col-4 text-end">
-                        <p>{review.rating}</p>
+                        <p>{renderStars(review.rating)}</p>
                     </div>
                     <div className="col-8 text-start">
                         <p>{review.reviewContent}</p>

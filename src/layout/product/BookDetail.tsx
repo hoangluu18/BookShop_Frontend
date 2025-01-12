@@ -7,6 +7,8 @@ import ProductImage from "./components/ProductImage";
 import Review from "./components/Review";
 import {Carousel} from "react-responsive-carousel"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import RatingStar from "../utils/RatingStar";
+import NumberFormat from "../utils/NumberFormat";
 interface BookDetailPropsInterface {
     book: BookModel
 }
@@ -87,13 +89,15 @@ const BookDetail: React.FC = () => {
                     <div className="row">
                         <div className="col-8">
                             <h1>{book.bookTitle}</h1>
-                            <h4>{book.averageRating}</h4>
-                            <h4>{book.sellingPrice}</h4>
+                            <h4>{RatingStar(book.averageRating ?? 0)} {book.averageRating}</h4>
+                            <h4>{NumberFormat(book.sellingPrice ?? 0)} đ</h4>
                             <hr />
                             <h4>{book.description}</h4>
                             <hr />
                         </div>
-                        <div className="col-4"></div>
+                        <div className="col-4">
+
+                        </div>
                     </div>
                 </div>
             </div>
