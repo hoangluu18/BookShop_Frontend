@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { fetchBooksById } from "../../api/BookApi";
 import ProductImage from "./components/ProductImage";
 import Review from "./components/Review";
-import {Carousel} from "react-responsive-carousel"
+import { Carousel } from "react-responsive-carousel"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import RatingStar from "../utils/RatingStar";
 import NumberFormat from "../utils/NumberFormat";
@@ -31,6 +31,33 @@ const BookDetail: React.FC = () => {
     const [book, setBook] = React.useState<BookModel | null>(null);
     const [loading, setLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState(null);
+    const [quantity, setQuantity] = React.useState<number>(1);
+
+    const increaseQuantity = () => {
+        if (quantity < (book?.quantity ?? 0)) {
+            setQuantity(quantity + 1);
+        }
+    }
+    const decreaseQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    }
+
+    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newQuantity = parseInt(e.target.value);
+        const maxQuantity = book?.quantity ?? 0;
+        if (!isNaN(newQuantity) && newQuantity >= 1 && newQuantity <= maxQuantity) {
+            setQuantity(newQuantity);
+        }
+    };
+
+    const handleBuyNow = () => {
+        alert('Mua ngay');
+    }
+    const handleAddToCart = () => {
+        alert('Thêm vào giỏ hàng');
+    }
 
     useEffect(() => {
         fetchBooksById(bookIdNumber).then(
@@ -78,8 +105,8 @@ const BookDetail: React.FC = () => {
             </body>
         )
     }
-    
-        return (
+
+    return (
         <div className="container">
             <div className="row mt-4 mb-4">
                 <div className="col-4">
@@ -96,7 +123,35 @@ const BookDetail: React.FC = () => {
                             <hr />
                         </div>
                         <div className="col-4">
-
+                            <div className="quantity-section p-3 border rounded">
+                                <div className="d-flex align-items-center mb-2">
+                                    <span className="me-2">Số lượng</span>
+                                    <div className="d-flex align-items-center quantity-control">
+                                        <button className="btn btn-outline-secondary" onClick={decreaseQuantity}>-</button>
+                                        <input
+                                            type="text"
+                                            className="form-control text-center mx-2"
+                                            value={quantity}
+                                            min={1}
+                                            style={{ width: '50px' }}
+                                            onChange={handleQuantityChange}
+                                        />
+                                        <button className="btn btn-outline-secondary" onClick={increaseQuantity}>+</button>
+                                    </div>
+                                </div>
+                                {
+                                    book?.sellingPrice && (
+                                        <div className="mt-2 text-center">
+                                            Số tiền tạm tính <br />
+                                            <h4>{NumberFormat(quantity * book.sellingPrice)} đ</h4>
+                                        </div>
+                                    )
+                                }
+                                <div className="d-grid gap-2 mt-3">
+                                    <button type="button" className="btn btn-danger" onClick={handleBuyNow}>Mua ngay</button>
+                                    <button type="button" className="btn btn-outline-secondary" onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,7 +160,7 @@ const BookDetail: React.FC = () => {
                 <Review bookId={bookIdNumber} />
             </div>
         </div>
-    
+
     );
 }
 export default BookDetail;
