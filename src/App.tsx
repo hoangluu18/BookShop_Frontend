@@ -8,6 +8,7 @@ import HomePage from './layout/homepage/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import About from './layout/about/About';
 import BookDetail from './layout/product/BookDetail';
+import Register from './layout/user/Register';
 function App() {
   const [keyword, setKeyword] = useState('');
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='category/:categoryId'  element={<HomePage keyWord={keyword} />}  />
           <Route path='/about' element={<About />} /> 
           <Route path='book/:bookId' element= {<BookDetail />} />
+          <Route path='/register' element= {<Register/>} />
         </Routes>
 
         <Footer />
